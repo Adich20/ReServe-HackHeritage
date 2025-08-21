@@ -1,25 +1,22 @@
-:root {
-  --color-primary: #2ECC71;   /* Freshness, sustainability */
-  --color-secondary: #5DADE2; /* Trust, tech */
-  --color-accent1: #F39C12;   /* Compassion, CTA */
-  --color-accent2: #9B59B6;   /* Innovation */
-  --color-neutral: #2C3E50;   /* Text */
-  --color-neutral-80: #415b76;
-  --color-surface: #f7fafc;
-  --ring: 0 0 0 4px rgb(46 204 113 / 20%);
-}
-
-/* Brand Utility Classes */
-.bg-primary { background-color: var(--color-primary); }
-.bg-secondary { background-color: var(--color-secondary); }
-.bg-accent1 { background-color: var(--color-accent1); }
-.bg-accent2 { background-color: var(--color-accent2); }
-
-.text-primary { color: var(--color-primary); }
-.text-secondary { color: var(--color-secondary); }
-.text-accent1 { color: var(--color-accent1); }
-.text-accent2 { color: var(--color-accent2); }
-.text-neutral { color: var(--color-neutral); }
-
-/* Focus ring for brand components */
-.ring-brand:focus { outline: var(--ring); }
+:root{
+    --color-primary:#2ECC71;   /* Freshness, sustainability */
+    --color-secondary:#5DADE2; /* Trust, tech */
+    --color-accent1:#F39C12;   /* Compassion, CTA */
+    --color-accent2:#9B59B6;   /* Innovation */
+    --color-neutral:#2C3E50;   /* Text */
+    --color-neutral-80:#415b76;
+    --color-surface:#1a1a1a;
+    --ring: 0 0 0 4px rgb(46 204 113 / 20%);
+  }
+  
+  .bg-primary{background-color:var(--color-primary)}
+  .bg-secondary{background-color:var(--color-secondary)}
+  .bg-accent1{background-color:var(--color-accent1)}
+  .bg-accent2{background-color:var(--color-accent2)}
+  .text-primary{color:var(--color-primary)}
+  .text-secondary{color:var(--color-secondary)}
+  .text-accent1{color:var(--color-accent1)}
+  .text-accent2{color:var(--color-accent2)}
+  .text-neutral{color:var(--color-neutral)}
+  .ring-brand:focus{outline:var(--ring)}
+  
