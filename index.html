@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ReServe – Smarter Surplus Food Distribution</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Brand Variables + Helper Classes -->
+  <style>
+    :root{
+      --color-primary:#2ECC71;   /* Freshness, sustainability */
+      --color-secondary:#5DADE2; /* Trust, tech */
+      --color-accent1:#F39C12;   /* Compassion, CTA */
+      --color-accent2:#9B59B6;   /* Innovation */
+      --color-neutral:#2C3E50;   /* Text */
+      --color-neutral-80:#415b76;
+      --color-surface:#f7fafc;
+      --ring: 0 0 0 4px rgb(46 204 113 / 20%);
+    }
+    .bg-primary{background-color:var(--color-primary)}
+    .bg-secondary{background-color:var(--color-secondary)}
+    .bg-accent1{background-color:var(--color-accent1)}
+    .bg-accent2{background-color:var(--color-accent2)}
+    .text-primary{color:var(--color-primary)}
+    .text-secondary{color:var(--color-secondary)}
+    .text-accent1{color:var(--color-accent1)}
+    .text-accent2{color:var(--color-accent2)}
+    .text-neutral{color:var(--color-neutral)}
+    .ring-brand:focus{outline:var(--ring)}
+  </style>
+</head>
+
+<body class="antialiased text-neutral bg-white dark:bg-gray-900 dark:text-gray-100 transition-colors">
+  <!-- ================= NAVBAR ================= -->
+  <header class="sticky top-0 z-40 border-b border-gray-100/70 bg-white/80 backdrop-blur dark:bg-gray-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between">
+        <!-- Brand -->
+        <a href="#" class="flex items-center gap-2">
+          <img src="logo.png" alt="ReServe logo" class="h-14 w-14 rounded-md shadow" />
+          <span class="font-bold text-lg tracking-tight">Re<span class="text-primary">Serve</span></span>
+        </a>
+
+        <!-- Desktop Nav -->
+        <nav class="hidden md:flex items-center gap-6">
+          <a href="#how" class="hover:text-primary transition">How it works</a>
+          <a href="#features" class="hover:text-primary transition">Features</a>
+          <a href="#impact" class="hover:text-primary transition">Impact</a>
+          <a href="#partners" class="hover:text-primary transition">Partners</a>
+        </nav>
+
+        <!-- CTAs + Dark Mode -->
+        <div class="hidden md:flex items-center gap-3">
+          <button id="darkToggle" aria-label="Toggle dark mode" class="px-3 py-2 rounded-lg border border-gray-200 hover:border-primary hover:text-primary transition">🌙</button>
+          <a href="#demo" class="px-4 py-2 rounded-lg border border-gray-200 hover:border-primary hover:text-primary transition">View Demo</a>
+          <a href="#signup" class="px-4 py-2 rounded-lg bg-primary text-white font-semibold hover:opacity-90 transition">Get Started</a>
+        </div>
+
+        <!-- Mobile menu button -->
+        <button id="menuBtn" class="md:hidden inline-flex items-center justify-center p-2 rounded-lg border border-gray-200 hover:border-primary hover:text-primary transition" aria-label="Open menu">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div id="mobileMenu" class="md:hidden hidden border-t border-gray-100 bg-white dark:bg-gray-800">
+      <nav class="px-4 py-3 space-y-2">
+        <a href="#how" class="block py-2 hover:text-primary">How it works</a>
+        <a href="#features" class="block py-2 hover:text-primary">Features</a>
+        <a href="#impact" class="block py-2 hover:text-primary">Impact</a>
+        <a href="#partners" class="block py-2 hover:text-primary">Partners</a>
+        <div class="pt-2 flex gap-2">
+          <a href="#demo" class="flex-1 px-4 py-2 rounded-lg border border-gray-200 text-center hover:border-primary hover:text-primary">View Demo</a>
+          <a href="#signup" class="flex-1 px-4 py-2 rounded-lg bg-primary text-white text-center font-semibold">Get Started</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ================= HERO ================= -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 -z-10 bg-gradient-to-b from-[color:var(--color-secondary)] via-white to-[color:var(--color-primary)] opacity-20 dark:opacity-30"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
+      <div class="grid md:grid-cols-2 gap-10 items-center">
+        <div>
+          <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">
+            Smarter Surplus Food Distribution for a
+            <span class="text-primary">Zero-Waste</span> Community
+          </h1>
+          <p class="mt-5 text-lg text-[color:var(--color-neutral-80)] dark:text-gray-300">
+            ReServe connects restaurants and grocers with local shelters & food banks using real-time listing, smart routing, and transparent tracking.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a href="#signup" class="px-6 py-3 rounded-xl bg-accent1 text-white font-semibold shadow hover:translate-y-[1px] transition">Become a Donor</a>
+            <a href="#signup" class="px-6 py-3 rounded-xl bg-accent2 text-white font-semibold shadow hover:translate-y-[1px] transition">Join as Recipient</a>
+            <a href="#demo" class="px-6 py-3 rounded-xl border border-gray-200 hover:border-primary hover:text-primary transition">See a Live Demo</a>
+          </div>
+        </div>
+
+        <!-- Hero Illustration -->
+        <div class="relative">
+          <img src="https://dummyimage.com/500x350/edf2f7/333&text=🍲+Live+Food+Board" alt="Live Food Board illustration" class="rounded-2xl shadow border border-gray-200 dark:border-gray-700" />
+          <div class="absolute -bottom-6 -right-6 h-24 w-24 bg-accent2/20 blur-2xl rounded-full"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= IMPACT STATS ================= -->
+  <section id="impact" class="py-16 md:py-20 bg-[color:var(--color-surface)] dark:bg-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl md:text-4xl font-bold text-center">Real Impact, <span class="text-secondary">Every Day</span></h2>
+      <div class="mt-12 grid sm:grid-cols-3 gap-6 text-center">
+        <div class="rounded-2xl border border-gray-200 bg-white dark:bg-gray-700 p-8">
+          <p class="text-4xl font-extrabold text-primary counter" data-target="12480">0</p>
+          <p class="mt-2 text-sm text-[color:var(--color-neutral-80)] dark:text-gray-300">Meals redistributed</p>
+        </div>
+        <div class="rounded-2xl border border-gray-200 bg-white dark:bg-gray-700 p-8">
+          <p class="text-4xl font-extrabold text-secondary counter" data-target="7.9">0</p>
+          <p class="mt-2 text-sm text-[color:var(--color-neutral-80)] dark:text-gray-300">CO₂ avoided (t)</p>
+        </div>
+        <div class="rounded-2xl border border-gray-200 bg-white dark:bg-gray-700 p-8">
+          <p class="text-4xl font-extrabold text-accent2 counter" data-target="98">0%</p>
+          <p class="mt-2 text-sm text-[color:var(--color-neutral-80)] dark:text-gray-300">Safe delivery compliance</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PARTNERS ================= -->
+  <section id="partners" class="py-16 md:py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl md:text-4xl font-bold text-center">Built with the <span class="text-accent1">Community</span></h2>
+      <p class="mt-3 text-center text-[color:var(--color-neutral-80)] dark:text-gray-300">Local restaurants, grocers, shelters & NGOs.</p>
+
+      <div class="mt-10 grid grid-cols-2 md:grid-cols-4 gap-6 items-center">
+        <div class="rounded-xl border border-gray-200 bg-white/60 p-4 text-center font-semibold text-gray-600">NGO</div>
+        <div class="rounded-xl border border-gray-200 bg-white/60 p-4 text-center font-semibold text-gray-600">Restaurant</div>
+        <div class="rounded-xl border border-gray-200 bg-white/60 p-4 text-center font-semibold text-gray-600">Shelter</div>
+        <div class="rounded-xl border border-gray-200 bg-white/60 p-4 text-center font-semibold text-gray-600">Grocer</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SIGNUP ================= -->
+  <section id="signup" class="py-16 md:py-20 bg-gradient-to-b from-white via-[color:var(--color-secondary)]/10 to-[color:var(--color-primary)]/10 dark:from-gray-900 dark:via-gray-800 dark:to-gray-700">
+    <div class="max-w-lg mx-auto px-4 sm:px-6">
+      <div class="rounded-2xl border border-gray-200 bg-white dark:bg-gray-800 p-6 md:p-8 shadow-sm">
+        <h3 class="text-2xl font-bold text-center">Get Started with ReServe</h3>
+        <p class="mt-2 text-center text-[color:var(--color-neutral-80)] dark:text-gray-300">Create an account as a donor or recipient.</p>
+
+        <form id="signupForm" class="mt-6 space-y-4">
+          <div class="grid grid-cols-2 gap-3">
+            <label class="flex items-center gap-2 rounded-lg border border-gray-200 p-3 cursor-pointer hover:border-primary">
+              <input type="radio" name="role" class="accent-[var(--color-primary)] ring-brand" checked>
+              <span>Donor</span>
+            </label>
+            <label class="flex items-center gap-2 rounded-lg border border-gray-200 p-3 cursor-pointer hover:border-primary">
+              <input type="radio" name="role" class="accent-[var(--color-primary)] ring-brand">
+              <span>Recipient</span>
+            </label>
+          </div>
+
+          <input type="text" id="org" placeholder="Organization name" required class="w-full rounded-lg border border-gray-200 p-3 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-primary)]/40" />
+          <input type="email" id="email" placeholder="Work email" required class="w-full rounded-lg border border-gray-200 p-3 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-primary)]/40" />
+          <div class="grid grid-cols-2 gap-3">
+            <input type="password" id="pass" placeholder="Password" required class="w-full rounded-lg border border-gray-200 p-3 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-primary)]/40" />
+            <input type="password" id="confirm" placeholder="Confirm" required class="w-full rounded-lg border border-gray-200 p-3 focus:outline-none focus:ring-2 focus:ring-[color:var(--color-primary)]/40" />
+          </div>
+
+          <button type="submit" class="w-full mt-2 px-4 py-3 rounded-lg bg-accent1 text-white font-semibold hover:opacity-90 transition">Create Account</button>
+          <p class="text-xs text-center text-[color:var(--color-neutral-80)] dark:text-gray-400">By signing up you agree to our terms & privacy policy.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="border-t border-gray-100 dark:border-gray-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-2">
+          <img src="https://dummyimage.com/28x28/2ECC71/ffffff.png&text=R" alt="ReServe logo" class="h-7 w-7 rounded-md shadow" />
+          <span class="font-semibold">Re<span class="text-primary">Serve</span></span>
+        </div>
+        <p class="text-sm text-[color:var(--color-neutral-80)] dark:text-gray-400">© 2025 ReServe — Built for trust, freshness & community.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Mobile Menu Toggle
+    const btn = document.getElementById('menuBtn');
+    const menu = document.getElementById('mobileMenu');
+    btn?.addEventListener('click', ()=> menu.classList.toggle('hidden'));
+
+    // Dark Mode Toggle
+    const darkToggle = document.getElementById('darkToggle');
+    darkToggle?.addEventListener('click', ()=> {
+      document.documentElement.classList.toggle('dark');
+    });
+
+    // Impact Counter Animation
+    const counters = document.querySelectorAll('.counter');
+    counters.forEach(counter => {
+      const updateCount = () => {
+        const target = +counter.getAttribute('data-target');
+        const current = +counter.innerText.replace(/[^0-9.]/g, '') || 0;
+        const increment = target / 100;
+        if(current < target) {
+          counter.innerText = (current + increment).toFixed(0) + (counter.innerText.includes('%') ? '%' : '');
+          setTimeout(updateCount, 20);
+        } else {
+          counter.innerText = target + (counter.innerText.includes('%') ? '%' : '');
+        }
+      }
+      updateCount();
+    });
+
+    // Signup Form Validation
+    document.getElementById('signupForm')?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const pass = document.getElementById('pass').value;
+      const confirm = document.getElementById('confirm').value;
+      if(pass !== confirm){
+        alert('Passwords do not match!');
+        return;
+      }
+      alert('Account created successfully! (Demo)');
+    });
+  </script>
+</body>
+</html>
