@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>How ReServe Works</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class' };
+  </script>
+
+  <!-- AOS Library -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="antialiased bg-gray-900 text-gray-100 transition-colors">
+  <!-- HERO -->
+  <section class="relative py-20 text-center bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(46,204,113,0.3),transparent_60%)] blur-3xl"></div>
+    <div class="relative max-w-4xl mx-auto px-4">
+      <h1 class="text-4xl md:text-5xl font-extrabold text-primary" data-aos="fade-up">How ReServe Works</h1>
+      <p class="mt-4 text-lg text-gray-300" data-aos="fade-up" data-aos-delay="200">
+        Seamlessly connecting food donors and receivers.
+      </p>
+    </div>
+  </section>
+
+  <!-- WORKFLOW -->
+  <section class="py-16 md:py-24 relative">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="relative">
+        <!-- Flow Line -->
+        <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-1 bg-green-500/30 h-full hidden md:block"></div>
+
+        <!-- Steps -->
+        <div class="space-y-16">
+          <!-- Step 1 -->
+          <div class="flex flex-col md:flex-row items-center md:items-start gap-6" data-aos="fade-right">
+            <div class="w-16 h-16 flex items-center justify-center bg-green-600 rounded-full text-white shadow-lg">🍲</div>
+            <div class="bg-gray-800 rounded-xl p-6 shadow-lg w-full md:w-2/3 hover:scale-[1.02] transition-transform">
+              <h3 class="text-xl font-bold text-green-400">Step 1</h3>
+              <p class="mt-2 text-gray-300">Food donors list surplus food (type, quantity, freshness, availability).</p>
+            </div>
+          </div>
+          <!-- Step 2 -->
+          <div class="flex flex-col md:flex-row items-center md:items-start gap-6 md:flex-row-reverse" data-aos="fade-left">
+            <div class="w-16 h-16 flex items-center justify-center bg-green-600 rounded-full text-white shadow-lg">🔔</div>
+            <div class="bg-gray-800 rounded-xl p-6 shadow-lg w-full md:w-2/3 hover:scale-[1.02] transition-transform">
+              <h3 class="text-xl font-bold text-green-400">Step 2</h3>
+              <p class="mt-2 text-gray-300">Smart notifications sent to NGOs, students, staff with location & pickup time.</p>
+            </div>
+          </div>
+          <!-- Step 3 -->
+          <div class="flex flex-col md:flex-row items-center md:items-start gap-6" data-aos="fade-right">
+            <div class="w-16 h-16 flex items-center justify-center bg-green-600 rounded-full text-white shadow-lg">✅</div>
+            <div class="bg-gray-800 rounded-xl p-6 shadow-lg w-full md:w-2/3 hover:scale-[1.02] transition-transform">
+              <h3 class="text-xl font-bold text-green-400">Step 3</h3>
+              <p class="mt-2 text-gray-300">Food safety ensured with expiry timers and packaging guidelines.</p>
+            </div>
+          </div>
+          <!-- Step 4 -->
+          <div class="flex flex-col md:flex-row items-center md:items-start gap-6 md:flex-row-reverse" data-aos="fade-left">
+            <div class="w-16 h-16 flex items-center justify-center bg-green-600 rounded-full text-white shadow-lg">📊</div>
+            <div class="bg-gray-800 rounded-xl p-6 shadow-lg w-full md:w-2/3 hover:scale-[1.02] transition-transform">
+              <h3 class="text-xl font-bold text-green-400">Step 4</h3>
+              <p class="mt-2 text-gray-300">Impact dashboard tracks food saved, people served, and carbon footprint reduced.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CALL TO ACTION -->
+  <section class="text-center py-12 bg-gray-800">
+    <a href="index.html#signup" class="px-6 py-3 rounded-lg bg-green-600 text-white font-semibold shadow hover:bg-green-500 transition">Join Us Today</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-gray-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 text-center">
+      <p class="text-sm text-gray-400">© 2025 ReServe — Built for trust, freshness & community.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000, easing: 'ease-out-cubic', once: true });
+  </script>
+</body>
+</html>
