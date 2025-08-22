@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Donor Dashboard - ReServe</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class' }
+  </script>
+
+  <!-- Dark Mode Initialization -->
+  <script>
+    (function () {
+      try {
+        const ls = localStorage.getItem('theme');
+        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (ls === 'dark' || (!ls && systemDark)) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <style>
+    :root {
+      --color-primary: #2ECC71;
+      --color-secondary: #5DADE2;
+      --color-accent1: #F39C12;
+      --color-accent2: #9B59B6;
+      --color-neutral: #497096;
+      --color-neutral-80: #415b76;
+      --color-surface: #171717;
+      --ring: 0 0 0 4px rgba(43, 197, 107, 0.2);
+    }
+    .ring-brand:focus {
+      outline: var(--ring);
+    }
+  </style>
+</head>
+<body class="antialiased bg-gray-50 text-neutral dark:bg-gray-900 dark:text-gray-100 transition-colors">
+
+  <!-- Navigation Bar -->
+  <nav class="bg-white dark:bg-gray-800 shadow py-3 border-b border-gray-200 dark:border-gray-700">
+    <div class="max-w-6xl mx-auto px-4 flex justify-between items-center">
+      <a href="index.html" class="flex items-center gap-2">
+        <img src="logo.png" alt="ReServe logo" class="h-10 w-10 rounded shadow" />
+        <span class="font-bold text-lg tracking-tight"><span class="text-white dark:text-gray-100">Re</span><span class="text-[color:var(--color-primary)]">Serve</span></span>
+      </a>
+      <ul class="flex gap-6 text-gray-700 dark:text-gray-200 font-medium">
+        <li><a href="index.html" class="hover:text-[color:var(--color-primary)]">Home</a></li>
+      </ul>
+      <button id="darkToggle" aria-label="Toggle dark mode" class="px-3 py-2 rounded-lg border border-gray-200 hover:border-primary hover:text-primary transition dark:border-gray-700">
+        🌙
+      </button>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="max-w-2xl mx-auto px-4 sm:px-6 py-10">
+    <!-- Donation Form -->
+    <div class="rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-6 md:p-8 shadow-sm">
+      <h1 class="text-2xl font-bold text-[color:var(--color-primary)]">List a Surplus</h1>
+      <p class="mt-2 text-gray-600 dark:text-gray-300">Add details so nearby recipients can view and request it.</p>
+
+      <form id="donationForm" class="mt-6 space-y-4">
+        <div>
+          <label class="text-sm font-medium">Type</label>
+          <select id="type" required class="mt-1 w-full rounded-lg border border-gray-200 p-3 dark:border-gray-700 bg-white dark:bg-gray-800">
+            <option value="Cooked Food">Cooked Food</option>
+            <option value="Raw Produce">Raw Produce</option>
+            <option value="Packaged Items">Packaged Items</option>
+            <option value="Baked Goods">Baked Goods</option>
+            <option value="Beverages">Beverages</option>
+          </select>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="text-sm font-medium">Quantity</label>
+            <input id="quantity" type="number" min="1" placeholder="e.g., 25" required class="mt-1 w-full rounded-lg border border-gray-200 p-3 dark:border-gray-700 bg-white dark:bg-gray-800" />
+          </div>
+          <div>
+            <label class="text-sm font-medium">Freshness Period</label>
+            <select id="freshness" required class="mt-1 w-full rounded-lg border border-gray-200 p-3 dark:border-gray-700 bg-white dark:bg-gray-800">
+              <option value="2 hours">2 hours</option>
+              <option value="6 hours">6 hours</option>
+              <option value="12 hours">12 hours</option>
+              <option value="1 day">1 day</option>
+              <option value="2 days">2 days</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="text-sm font-medium">Pickup Window (optional)</label>
+          <input id="pickup" type="text" placeholder="Today 4–7 PM" class="mt-1 w-full rounded-lg border border-gray-200 p-3 dark:border-gray-700 bg-white dark:bg-gray-800" />
+        </div>
+
+        <div>
+          <label class="text-sm font-medium">Notes (optional)</label>
+          <textarea id="notes" rows="3" placeholder="All vegetarian, contains nuts, etc." class="mt-1 w-full rounded-lg border border-gray-200 p-3 dark:border-gray-700 bg-white dark:bg-gray-800"></textarea>
+        </div>
+
+        <button type="submit" class="w-full mt-2 px-4 py-3 rounded-lg bg-[color:var(--color-primary)] text-white font-semibold hover:bg-[color:#27ae60] transition">Publish Donation</button>
+      </form>
+    </div>
+
+    <!-- Donation Listings -->
+    <div id="mylist" class="mt-10 rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-6 md:p-8 shadow-sm">
+      <h2 class="text-xl font-bold text-[color:var(--color-primary)] mb-4">Your Donations</h2>
+      <div id="donation-list" class="space-y-4"></div>
+    </div>
+  </main>
+
+  <script>
+    // Mock user authentication
+    function getCurrentUser() {
+      // Simulate a logged-in donor; replace with actual auth logic
+      return JSON.parse(localStorage.getItem('currentUser')) || { id: 'D101', name: 'Sample Donor', role: 'donor' };
+    }
+
+    // Mock unique ID generator
+    function uid() {
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+      });
+    }
+
+    // Mock donation storage
+    function getDonations() {
+      return JSON.parse(localStorage.getItem('donations')) || [];
+    }
+
+    function saveDonations(donations) {
+      localStorage.setItem('donations', JSON.stringify(donations));
+    }
+
+    // Check user authentication
+    const me = getCurrentUser();
+    if (!me || me.role !== 'donor') {
+      window.location.href = 'login.html';
+    }
+
+    // Handle donation form submission
+    document.getElementById('donationForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const donation = {
+        id: uid(),
+        donorId: me.id,
+        donorName: me.name,
+        type: document.getElementById('type').value,
+        quantity: document.getElementById('quantity').value,
+        freshness: document.getElementById('freshness').value,
+        pickup: document.getElementById('pickup').value.trim(),
+        notes: document.getElementById('notes').value.trim(),
+        status: 'available',
+        createdAt: Date.now()
+      };
+      const all = getDonations();
+      all.push(donation);
+      saveDonations(all);
+      alert('Donation published!');
+      window.location.href = '#mylist';
+      renderDonations();
+    });
+
+    // Render donation list
+    function renderDonations() {
+      const donationList = document.getElementById('donation-list');
+      const donations = getDonations().filter(d => d.donorId === me.id);
+      donationList.innerHTML = '';
+      if (donations.length === 0) {
+        donationList.innerHTML = `<p class="text-gray-600 dark:text-gray-300">No donations listed yet.</p>`;
+        return;
+      }
+      donations.forEach(d => {
+        donationList.innerHTML += `
+          <div class="p-4 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700">
+            <p class="text-lg font-semibold text-[color:var(--color-primary)]">${d.type}</p>
+            <p class="text-sm text-gray-600 dark:text-gray-300">Quantity: ${d.quantity} • Freshness: ${d.freshness}</p>
+            <p class="text-sm text-gray-600 dark:text-gray-300">Pickup: ${d.pickup || 'Not specified'}</p>
+            <p class="text-sm text-gray-600 dark:text-gray-300">Notes: ${d.notes || 'None'}</p>
+            <p class="text-sm text-[color:var(--color-accent2)] mt-1">Status: ${d.status}</p>
+          </div>`;
+      });
+    }
+
+    // Dark toggle
+    document.getElementById('darkToggle').addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+    });
+
+    // Initial render
+    document.addEventListener('DOMContentLoaded', () => {
+      renderDonations();
+    });
+  </script>
+</body>
+</html>
