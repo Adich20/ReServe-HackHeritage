@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Operational Workflow – ReServe</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class' };
+  </script>
+
+  <!-- AOS Library -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+
+  <!-- Custom CSS for arrows -->
+  <style>
+    .arrow-down::after {
+      content: '';
+      display: block;
+      width: 2px;
+      height: 40px;
+      background: #22c55e;
+      margin: 0 auto;
+    }
+    .arrow-right::after {
+      content: '';
+      display: block;
+      height: 2px;
+      width: 40px;
+      background: #22c55e;
+      margin: auto 0;
+    }
+  </style>
+</head>
+<body class="antialiased bg-gray-900 text-gray-100 transition-colors">
+
+  <!-- HERO -->
+  <section class="relative py-16 text-center bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900">
+    <div class="relative max-w-4xl mx-auto px-4">
+      <h1 class="text-4xl md:text-5xl font-extrabold text-green-400" data-aos="fade-up">
+        Features Workflow
+      </h1>
+      <p class="mt-4 text-lg text-gray-300" data-aos="fade-up" data-aos-delay="200">
+        How ReServe connects donors, receivers, and delivery partners.
+      </p>
+    </div>
+  </section>
+
+  <!-- WORKFLOW -->
+  <section class="py-16 relative">
+    <div class="max-w-5xl mx-auto px-4 space-y-12">
+
+      <!-- Step 1 -->
+      <div class="text-center space-y-4" data-aos="fade-up">
+        <div class="bg-gray-800 p-6 rounded-2xl shadow-lg border border-green-600 inline-block">
+          <h3 class="text-xl font-bold text-green-400">Sign Up / Login</h3>
+          <p class="text-gray-300">Receiver registers or logs in to the platform.</p>
+        </div>
+      </div>
+      <div class="arrow-down"></div>
+
+      <!-- Step 2 -->
+      <div class="text-center space-y-4" data-aos="fade-up">
+        <div class="bg-gray-800 p-6 rounded-2xl shadow-lg border border-green-600 inline-block">
+          <h3 class="text-xl font-bold text-green-400">Search Surplus</h3>
+          <p class="text-gray-300">Receivers look for available food donations.</p>
+        </div>
+      </div>
+
+      <!-- Branch -->
+      <div class="grid grid-cols-2 gap-6 mt-8 items-start" data-aos="fade-up">
+        <div class="bg-gray-800 p-6 rounded-2xl shadow-lg border border-green-600 text-center">
+          <h3 class="text-lg font-bold text-green-400">Immediate Requirement</h3>
+          <p class="text-gray-300">Direct availability check with admin.</p>
+        </div>
+        <div class="bg-gray-800 p-6 rounded-2xl shadow-lg border border-green-600 text-center">
+          <h3 class="text-lg font-bold text-green-400">Future Requirement</h3>
+          <p class="text-gray-300">Raise a request and negotiate with donor.</p>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="arrow-down"></div>
+      <div class="text-center space-y-4" data-aos="fade-up">
+        <div class="bg-gray-800 p-6 rounded-2xl shadow-lg border border-yellow-500 inline-block">
+          <h3 class="text-xl font-bold text-yellow-400">AI/ML + Manual Quality Check</h3>
+          <p class="text-gray-300">Ensuring food quality and freshness.</p>
+        </div>
+      </div>
+      <div class="arrow-down"></div>
+
+      <!-- Step 4 -->
+      <div class="text-center space-y-4" data-aos="fade-up">
+        <div class="bg-gray-800 p-6 rounded-2xl shadow-lg border border-green-600 inline-block">
+          <h3 class="text-xl font-bold text-green-400">Coordinate Pickup</h3>
+          <p class="text-gray-300">Admins and partners coordinate logistics.</p>
+        </div>
+      </div>
+      <div class="arrow-down"></div>
+
+      <!-- Decision -->
+      <div class="grid grid-cols-2 gap-6 mt-8 items-start" data-aos="fade-up">
+        <div class="bg-gray-800 p-6 rounded-2xl shadow-lg border border-green-600 text-center">
+          <h3 class="text-lg font-bold text-green-400">Pickup Successful</h3>
+          <p class="text-gray-300">Move to Impact Dashboard and feedback loop.</p>
+        </div>
+        <div class="bg-gray-800 p-6 rounded-2xl shadow-lg border border-red-600 text-center">
+          <h3 class="text-lg font-bold text-red-400">Pickup Failed</h3>
+          <p class="text-gray-300">Relist items or redirect to shelters/composting.</p>
+        </div>
+      </div>
+
+      <!-- Final -->
+      <div class="arrow-down"></div>
+      <div class="text-center space-y-4" data-aos="fade-up">
+        <div class="bg-gray-800 p-6 rounded-2xl shadow-lg border border-blue-600 inline-block">
+          <h3 class="text-xl font-bold text-blue-400">End Current Listing</h3>
+          <p class="text-gray-300">Closing the donation cycle and tracking impact.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-gray-700 mt-16">
+    <div class="max-w-7xl mx-auto px-4 py-10 text-center">
+      <p class="text-sm text-gray-400">© 2025 ReServe — Building a sustainable food network.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000, easing: 'ease-out-cubic', once: true });
+  </script>
+</body>
+</html>
