@@ -33,3 +33,18 @@ html.dark{
 
 /* Optional: smoother color transitions */
 *{transition: color .15s linear, background-color .15s linear, border-color .15s linear;}
+/* Smooth hover scale effect */
+.hover\:scale-\[1\.02\]:hover {
+  transform: scale(1.02);
+}
+
+/* Green glow effect for icons or highlights */
+.glow-green {
+  box-shadow: 0 0 20px rgba(46, 204, 113, 0.6);
+}
+
+/* Smooth transition for transforms */
+* {
+  transition: color .15s linear, background-color .15s linear, border-color .15s linear, transform .2s ease;
+}
+
