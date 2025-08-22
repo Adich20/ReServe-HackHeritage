@@ -380,6 +380,12 @@
           </div>
 
           <button type="submit" class="w-full mt-2 px-4 py-3 rounded-lg bg-accent1 text-white font-semibold hover:opacity-90 transition">Create Account</button>
+
+          <!-- ADDED: Login button (clickable) - placed just below Create Account -->
+          <button type="button" id="loginBtn" aria-label="Go to login" class="w-full mt-3 px-4 py-3 rounded-lg border border-gray-200 bg-white text-primary font-semibold hover:bg-primary hover:text-white transition dark:bg-gray-700 dark:text-gray-100 dark:border-gray-700">
+            Already have an account? Log in
+          </button>
+
           <p class="text-xs text-center text-[color:var(--color-neutral-80)] dark:text-gray-400">By signing up you agree to our terms & privacy policy.</p>
         </form>
       </div>
@@ -543,7 +549,7 @@
         // Still add to history for consistency
         conversationHistory.push({
           role: "model",
-          parts: [{ text: 'Sorry, something went wrong. Please try again!' }]
+          parts: [{ text: 'Sorry, something went wrong. Please try again!' } ]
         });
       }
     }
