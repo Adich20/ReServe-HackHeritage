@@ -48,3 +48,19 @@ html.dark{
   transition: color .15s linear, background-color .15s linear, border-color .15s linear, transform .2s ease;
 }
 
+/* ========== ADDED: Login button refinements ========== */
+/* Keep these light-weight — primary styling is handled by Tailwind classes in markup */
+#loginBtn {
+  transition: background-color .15s linear, color .15s linear, border-color .15s linear, transform .12s ease;
+  will-change: transform;
+}
+#loginBtn:focus {
+  outline: none;
+  box-shadow: var(--ring);
+  border-color: var(--color-primary);
+}
+.dark #loginBtn {
+  background-color: #374151;
+  color: var(--color-neutral);
+  border-color: #4B5563;
+}
