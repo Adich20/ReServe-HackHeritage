@@ -77,3 +77,19 @@ document.getElementById('signupForm')?.addEventListener('submit', (e) => {
   alert('Account created successfully! (Demo)');
 });
 
+/* ========== ADDED: Login button behavior (minimal, non-invasive) ========== */
+document.getElementById('loginBtn')?.addEventListener('click', (e) => {
+  // If there's a local login section, scroll to it
+  const loginSection = document.getElementById('login') || document.getElementById('loginPage');
+  if (loginSection) {
+    loginSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+  // Otherwise navigate to /login — change this to your app's login route if different
+  try {
+    window.location.href = '/login';
+  } catch (err) {
+    // Fallback: inform the developer
+    alert('Navigate to your login route (default: /login).');
+  }
+});
