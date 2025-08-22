@@ -1,3 +1,15 @@
+(function () {
+  try {
+    const ls = localStorage.getItem('theme');
+    const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (ls === 'dark' || (!ls && systemDark)) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  } catch (e) {}
+})();
+
 // Mobile Menu Toggle
 const btn = document.getElementById('menuBtn');
 const menu = document.getElementById('mobileMenu');
@@ -29,7 +41,7 @@ darkToggle?.addEventListener('click', () => {
   setTheme(isDark ? 'light' : 'dark');
 });
 
-// Initialize icon on load (class was already applied in <head> to prevent flash)
+// Initialize icon on load (in case of stored/system pref)
 applyIcon();
 
 // Impact Counter Animation
@@ -64,3 +76,4 @@ document.getElementById('signupForm')?.addEventListener('submit', (e) => {
   }
   alert('Account created successfully! (Demo)');
 });
+
