@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Donation History | ReServe</title>
+
+    <!-- Theme Apply -->
+    <script>
+        (function () {
+            try {
+                const ls = localStorage.getItem('theme');
+                const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                if (ls === 'dark' || (!ls && systemDark)) {
+                    document.documentElement.classList.add('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                }
+            } catch (e) { }
+        })();
+    </script>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = { darkMode: 'class' }</script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="antialiased text-neutral bg-white dark:bg-gray-900 dark:text-gray-100">
+
+    <!-- NAVBAR -->
+    <header
+        class="sticky top-0 z-40 border-b border-gray-100/70 bg-white/80 backdrop-blur dark:bg-gray-800/80 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex h-16 items-center justify-between">
+                <a href="index.html" class="flex items-center gap-2">
+                    <img src="logo.png" alt="ReServe logo" class="h-12 w-12 rounded-md shadow" />
+                    <span class="font-bold text-lg tracking-tight">Re<span class="text-primary">Serve</span></span>
+                </a>
+                <nav class="hidden md:flex items-center gap-6">
+                    <a href="donor-dash.html" class="hover:text-primary transition">Dashboard</a>
+                    <a href="donation-history.html" class="hover:text-primary transition font-semibold">My Donations</a>
+                    <a href="#" class="hover:text-primary transition">Profile</a>
+                </nav>
+                <div class="hidden md:flex items-center gap-3">
+                    <button id="darkToggle" aria-label="Toggle dark mode"
+                        class="px-3 py-2 rounded-lg border border-gray-200 hover:border-primary hover:text-primary transition dark:border-gray-700">🌙</button>
+                    <a href="index.html"
+                        class="px-4 py-2 rounded-lg bg-primary text-white font-semibold hover:opacity-90 transition">Logout</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- DONOR INFO -->
+  <!-- DONOR INFO (CLEAN, NO ICONS/PROFILE PIC) -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <div class="rounded-2xl border border-gray-200 bg-white dark:bg-gray-800 dark:border-gray-700 p-6 flex flex-col md:flex-row md:justify-between md:items-center gap-4">
+    
+    <!-- Donor ID -->
+    <div>
+      <h2 class="text-2xl font-bold mb-2">Donor Information</h2>
+      <p class="text-sm text-[color:var(--color-neutral-80)] dark:text-gray-300">
+        Donor ID: <span id="donorID" class="text-primary font-semibold"></span>
+      </p>
+    </div>
+
+    <!-- Email & Contact -->
+    <div class="flex flex-col sm:flex-row gap-6 mt-4 md:mt-0">
+      <p class="text-sm text-[color:var(--color-neutral-80)] dark:text-gray-300">Email: donorxxx@email.com</p>
+      <p class="text-sm text-[color:var(--color-neutral-80)] dark:text-gray-300">Contact: +91-9xxxxxxx45</p>
+    </div>
+
+  </div>
+</section>
+
+
+
+    <!-- DONATION HISTORY -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+        <h1 class="text-3xl md:text-4xl font-bold">Donation History 📊</h1>
+        <p class="mt-2 text-[color:var(--color-neutral-80)] dark:text-gray-300">Track all your past contributions with
+            detailed records.</p>
+
+        <div id="donationList" class="mt-8 space-y-4"></div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-gray-100 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex justify-between items-center">
+            <p class="text-sm text-[color:var(--color-neutral-80)] dark:text-gray-400">© 2025 ReServe — Empowering
+                Communities.</p>
+            <a href="#" class="hover:text-primary">Need Help?</a>
+        </div>
+    </footer>
+
+    <!-- Donation Generator -->
+    <script>
+        const donations = [
+            { type: "Cooked Meal", freshness: "Fresh (within 6 hrs)", quantity: "20 plates" },
+            { type: "Raw Vegetables", freshness: "2 days left", quantity: "15 kg" },
+            { type: "Packaged Snacks", freshness: "1 month shelf life", quantity: "50 packs" },
+            { type: "Baked Goods", freshness: "Best before 2 days", quantity: "30 pieces" },
+            { type: "Beverages", freshness: "10 days shelf life", quantity: "25 bottles" },
+            { type: "Rice & Pulses", freshness: "3 months shelf life", quantity: "40 kg" },
+            { type: "Dairy Products", freshness: "2 days left", quantity: "10 litres" },
+            { type: "Frozen Foods", freshness: "6 months frozen life", quantity: "12 packs" }
+        ];
+
+        function randomDate(start, end) {
+            const d = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+            return d.toLocaleDateString("en-IN", { year: 'numeric', month: 'short', day: 'numeric' });
+        }
+
+        function randomDonorID() {
+            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            let str = "";
+            for (let i = 0; i < 8; i++) str += chars.charAt(Math.floor(Math.random() * chars.length));
+            return `DNR-2025-${str}`;
+        }
+
+        function randomDonationID() {
+            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            let str = "";
+            for (let i = 0; i < 6; i++) str += chars.charAt(Math.floor(Math.random() * chars.length));
+            return `DON-${str}`;
+        }
+
+        // Assign one donor ID at top
+        document.getElementById("donorID").textContent = randomDonorID();
+
+        const donationList = document.getElementById("donationList");
+
+        // Generate 25 donations
+        for (let i = 0; i < 25; i++) {
+            const d = donations[Math.floor(Math.random() * donations.length)];
+            const donationID = randomDonationID();
+            const date = randomDate(new Date(2024, 10, 1), new Date()); // past 3 months
+
+            const card = document.createElement("div");
+            card.className = "rounded-xl border border-gray-200 bg-white dark:bg-gray-800 dark:border-gray-700 p-4";
+            card.innerHTML = `
+        <div class="flex justify-between items-center">
+          <div>
+            <p class="font-semibold">${d.quantity} – ${d.type}</p>
+            <p class="text-sm text-[color:var(--color-neutral-80)] dark:text-gray-400">Freshness: ${d.freshness}</p>
+            <p class="text-sm text-[color:var(--color-neutral-80)] dark:text-gray-400">Donation ID: <span class="text-secondary">${donationID}</span></p>
+          </div>
+          <span class="text-sm text-secondary">${date}</span>
+        </div>
+      `;
+            donationList.appendChild(card);
+        }
+    </script>
+
+    <!-- Dark Mode -->
+    <script>
+        document.getElementById('darkToggle').addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+        });
+    </script>
+</body>
+
+</html>
