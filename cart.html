@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Checkout - ReServe</title>
+  <title>Cart - ReServe</title>
 
   <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -152,13 +152,8 @@
       }
     });
 
-    // Fake cart data (surplus foods based on India with very low cost)
-    const cart = [
-      { name: "Day-Old Roti (Pack of 10)", quantity: 2, price: 10 },
-      { name: "Mixed Vegetable Curry (500g)", quantity: 1, price: 25 },
-      { name: "Leftover Jeera Rice (300g)", quantity: 3, price: 15 },
-      { name: "Samosa (Pack of 4)", quantity: 2, price: 12 }
-    ];
+    // Load cart from localStorage
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
     // Render cart and receipt
     function renderCart() {
