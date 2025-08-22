@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Search Food - ReServe</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class' }
+  </script>
+
+  <!-- Dark Mode Initialization -->
+  <script>
+    (function () {
+      try {
+        const ls = localStorage.getItem('theme');
+        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (ls === 'dark' || (!ls && systemDark)) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <style>
+    :root {
+      --color-primary: #2ECC71;
+      --color-secondary: #5DADE2;
+      --color-accent1: #F39C12;
+      --color-accent2: #9B59B6;
+      --color-neutral: #2C3E50;
+      --color-neutral-80: #415b76;
+      --color-surface: #1a1a1a;
+      --ring: 0 0 0 4px rgb(46 204 113 / 20%);
+    }
+    .ring-brand:focus {
+      outline: var(--ring);
+    }
+    #suggestions {
+      position: absolute;
+      background-color: white;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      width: 100%;
+      max-width: 500px;
+      z-index: 50;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    #suggestions div {
+      padding: 10px 14px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      color: black;
+    }
+    #suggestions div:hover {
+      background-color: var(--color-primary);
+      color: white;
+    }
+  </style>
+</head>
+<body class="antialiased text-neutral bg-gray-50 dark:bg-gray-900 dark:text-gray-100 transition-colors">
+
+  <!-- Navigation Bar -->
+  <nav class="bg-white dark:bg-gray-800 shadow py-3 border-b border-gray-200 dark:border-gray-700">
+    <div class="max-w-6xl mx-auto px-4 flex justify-between items-center">
+      <a href="index.html" class="flex items-center gap-2">
+        <img src="logo.png" alt="ReServe logo" class="h-10 w-10 rounded shadow" />
+        <span class="font-bold text-lg tracking-tight"><span class="text-white dark:text-gray-100">Re</span><span class="text-[color:var(--color-primary)]">Serve</span></span>
+      </a>
+      <ul class="flex gap-6 text-gray-700 dark:text-gray-200 font-medium">
+        <li><a href="index.html" class="hover:text-[color:var(--color-primary)]">Home</a></li>
+        <li><a href="search.html" class="hover:text-[color:var(--color-primary)]">Search Food</a></li>
+        <li><a href="cart.html" class="hover:text-[color:var(--color-primary)]">Cart</a></li>
+        <li><a href="profile.html" class="hover:text-[color:var(--color-primary)]">Profile</a></li>
+      </ul>
+      <button id="darkToggle" aria-label="Toggle dark mode" class="px-3 py-2 rounded-lg border border-gray-200 hover:border-primary hover:text-primary transition dark:border-gray-700">
+        🌙
+      </button>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="max-w-4xl mx-auto px-4 py-12">
+    <h1 class="text-4xl font-bold mb-8 text-center text-[color:var(--color-primary)]">Find Surplus Food</h1>
+
+    <!-- Search Bar -->
+    <div class="relative mb-10">
+      <div class="flex gap-2">
+        <input id="searchBar" type="text" placeholder="Search for roti, curry, rice..." class="flex-1 p-4 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-[color:var(--color-primary)]/50 dark:bg-gray-800 dark:text-gray-100" />
+        <button onclick="searchFood()" class="px-4 py-3 rounded-lg bg-[color:var(--color-primary)] text-white font-semibold hover:bg-[color:#27ae60] transition flex items-center justify-center">
+          🔍
+        </button>
+      </div>
+      <div id="suggestions" class="hidden"></div>
+    </div>
+
+    <!-- Results -->
+    <div id="results" class="space-y-4"></div>
+  </main>
+
+  <script>
+    // Mock database with low-cost surplus foods
+    const foodDB = [
+      { name: "Day-Old Roti (Pack of 10)", qty: 20, unit: "pieces", freshness: "Safe for 6 hrs", price: 10, donor: "D101" },
+      { name: "Mixed Vegetable Curry (500g)", qty: 10, unit: "bowls", freshness: "Safe for 4 hrs", price: 25, donor: "D102" },
+      { name: "Leftover Jeera Rice (300g)", qty: 15, unit: "bowls", freshness: "Safe for 5 hrs", price: 15, donor: "D103" },
+      { name: "Samosa (Pack of 4)", qty: 12, unit: "pieces", freshness: "Safe for 3 hrs", price: 12, donor: "D104" },
+      { name: "Poha (200g)", qty: 8, unit: "bowls", freshness: "Safe for 2 hrs", price: 10, donor: "D105" }
+    ];
+
+    const searchBar = document.getElementById("searchBar");
+    const suggestions = document.getElementById("suggestions");
+    const resultsDiv = document.getElementById("results");
+
+    // Load cart from localStorage
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    // Show suggestions while typing
+    searchBar.addEventListener("input", () => {
+      const query = searchBar.value.toLowerCase();
+      if (!query) {
+        suggestions.classList.add("hidden");
+        return;
+      }
+
+      const matches = foodDB.filter(item => item.name.toLowerCase().includes(query));
+      if (matches.length === 0) {
+        suggestions.classList.add("hidden");
+        return;
+      }
+
+      suggestions.innerHTML = matches
+        .map(item => `<div onclick="selectSuggestion('${item.name}')">${item.name}</div>`)
+        .join("");
+      suggestions.classList.remove("hidden");
+    });
+
+    // Select suggestion and trigger search
+    function selectSuggestion(value) {
+      searchBar.value = value;
+      suggestions.classList.add("hidden");
+      searchFood();
+    }
+
+    // Search on Enter key
+    searchBar.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") searchFood();
+    });
+
+    // Search food function
+    function searchFood() {
+      const query = searchBar.value.toLowerCase();
+      resultsDiv.innerHTML = "";
+
+      const results = foodDB
+        .filter(item => item.name.toLowerCase().includes(query))
+        .sort((a, b) => a.price - b.price);
+
+      if (results.length > 0) {
+        results.forEach(item => {
+          const cartItem = cart.find(cartItem => cartItem.name === item.name);
+          const quantity = cartItem ? cartItem.quantity : 0;
+          resultsDiv.innerHTML += `
+            <div class="p-5 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-md flex justify-between items-center hover:scale-[1.01] transition-transform">
+              <div>
+                <p class="text-lg font-semibold text-[color:var(--color-primary)]">${item.name}</p>
+                <p class="text-sm text-gray-600 dark:text-gray-300">${item.qty} ${item.unit} • ${item.freshness}</p>
+                <p class="text-sm text-[color:var(--color-accent2)] mt-1">Donor: ${item.donor} • Price: ₹${item.price}</p>
+              </div>
+              <div id="cart-${item.name.replace(/\s+/g, '')}" class="flex items-center gap-2">
+                ${quantity > 0 ? `
+                  <button onclick="updateCart('${item.name}', -1)" class="px-3 py-1 rounded-lg bg-gray-300 text-gray-800 hover:bg-gray-400 transition">-</button>
+                  <span id="count-${item.name.replace(/\s+/g, '')}">${quantity}</span>
+                  <button onclick="updateCart('${item.name}', 1)" class="px-3 py-1 rounded-lg bg-[color:var(--color-secondary)] text-white hover:bg-[color:#2e86c1] transition">+</button>
+                ` : `
+                  <button onclick="addToCart('${item.name}')" class="px-4 py-2 rounded-lg bg-[color:var(--color-secondary)] text-white font-medium hover:bg-[color:#2e86c1] transition">Add to Cart</button>
+                `}
+              </div>
+            </div>`;
+        });
+      } else {
+        resultsDiv.innerHTML = `<p class="text-red-600 dark:text-red-400">❌ No food available with that name. We will get back to you soon.</p>`;
+      }
+    }
+
+    // Add to cart
+    function addToCart(itemName) {
+      const item = foodDB.find(f => f.name === itemName);
+      if (!item) return;
+
+      const cartItem = cart.find(c => c.name === itemName);
+      if (cartItem) {
+        if (cartItem.quantity >= item.qty) {
+          alert("No more quantity available!");
+          return;
+        }
+        cartItem.quantity += 1;
+      } else {
+        cart.push({ name: item.name, quantity: 1, price: item.price });
+      }
+
+      localStorage.setItem("cart", JSON.stringify(cart));
+      searchFood(); // Re-render to update UI
+    }
+
+    // Update cart quantity
+    function updateCart(itemName, change) {
+      const item = foodDB.find(f => f.name === itemName);
+      const cartItem = cart.find(c => c.name === itemName);
+
+      if (!cartItem || !item) return;
+
+      cartItem.quantity += change;
+
+      if (cartItem.quantity <= 0) {
+        cart = cart.filter(c => c.name !== itemName);
+      } else if (cartItem.quantity > item.qty) {
+        alert("No more quantity available!");
+        cartItem.quantity = item.qty;
+      }
+
+      localStorage.setItem("cart", JSON.stringify(cart));
+      searchFood(); // Re-render to update UI
+    }
+
+    // Hide suggestions on click outside
+    document.addEventListener("click", (e) => {
+      if (!searchBar.contains(e.target) && !suggestions.contains(e.target)) {
+        suggestions.classList.add("hidden");
+      }
+    });
+
+    // Dark toggle
+    document.getElementById('darkToggle').addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+    });
+
+    // Initial render
+    searchFood();
+  </script>
+</body>
+</html>
