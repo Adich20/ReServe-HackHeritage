@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Recipient Dashboard | ReServe</title>
+
+  <!-- Apply stored/system theme BEFORE CSS paints -->
+  <script>
+    (function () {
+      try {
+        const ls = localStorage.getItem('theme');
+        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (ls === 'dark' || (!ls && systemDark)) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class' }
+  </script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="antialiased text-neutral bg-white dark:bg-gray-900 dark:text-gray-100">
+
+  <!-- ========== NAVBAR ========== -->
+  <header class="sticky top-0 z-40 border-b border-gray-100/70 bg-white/80 backdrop-blur dark:bg-gray-800/80 dark:border-gray-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between">
+        <!-- Brand -->
+        <a href="#" class="flex items-center gap-2">
+          <img src="logo.png" alt="ReServe logo" class="h-12 w-12 rounded-md shadow" />
+          <span class="font-bold text-lg tracking-tight">Re<span class="text-primary">Serve</span></span>
+        </a>
+
+        <!-- Nav -->
+        <nav class="hidden md:flex items-center gap-6">
+          <a href="#" class="hover:text-primary transition">Dashboard</a>
+          <a href="#" class="hover:text-primary transition">My Requests</a>
+          <a href="#" class="hover:text-primary transition">Profile</a>
+          <a href="#" class="hover:text-primary transition">Support</a>
+        </nav>
+
+        <!-- Dark Mode -->
+        <div class="hidden md:flex items-center gap-3">
+          <button id="darkToggle" aria-label="Toggle dark mode" class="px-3 py-2 rounded-lg border border-gray-200 hover:border-primary hover:text-primary transition dark:border-gray-700">🌙</button>
+          <a href="index.html" class="px-4 py-2 rounded-lg bg-primary text-white font-semibold hover:opacity-90 transition">Logout</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========== WELCOME SECTION ========== -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h1 class="text-3xl md:text-4xl font-bold">Welcome back, <span class="text-primary">Recipient</span> 🙌</h1>
+    <p class="mt-2 text-[color:var(--color-neutral-80)] dark:text-gray-300">Here’s an overview of your received support and quick actions.</p>
+  </section>
+
+  <!-- ========== DASHBOARD CARDS ========== -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-3 gap-6">
+    <!-- Requests Made -->
+    <div class="rounded-2xl border border-gray-200 bg-white dark:bg-gray-800 dark:border-gray-700 p-6">
+      <h3 class="text-lg font-semibold">Total Requests</h3>
+      <p class="text-4xl font-extrabold text-primary mt-2">42</p>
+    </div>
+    <!-- Meals Received -->
+    <div class="rounded-2xl border border-gray-200 bg-white dark:bg-gray-800 dark:border-gray-700 p-6">
+      <h3 class="text-lg font-semibold">Meals Received</h3>
+      <p class="text-4xl font-extrabold text-secondary mt-2">980</p>
+    </div>
+    <!-- Supporters Helped -->
+    <div class="rounded-2xl border border-gray-200 bg-white dark:bg-gray-800 dark:border-gray-700 p-6">
+      <h3 class="text-lg font-semibold">Donors Connected</h3>
+      <p class="text-4xl font-extrabold text-accent2 mt-2">15</p>
+    </div>
+  </section>
+
+  <!-- ========== QUICK ACTIONS ========== -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h2 class="text-2xl font-bold mb-6">Quick Actions</h2>
+    <div class="flex flex-wrap gap-4">
+      <a href="#" class="px-6 py-3 rounded-xl bg-accent1 text-white font-semibold shadow hover:translate-y-[1px] transition">📝 Create New Request</a>
+      <a href="#" class="px-6 py-3 rounded-xl border border-gray-200 hover:border-primary hover:text-primary transition dark:border-gray-700">📊 View Request History</a>
+      <a href="#" class="px-6 py-3 rounded-xl border border-gray-200 hover:border-primary hover:text-primary transition dark:border-gray-700">👤 Manage Profile</a>
+    </div>
+  </section>
+
+  <!-- ========== RECENT ACTIVITY ========== -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h2 class="text-2xl font-bold mb-6">Recent Requests</h2>
+    <div class="space-y-4">
+      <div class="rounded-xl border border-gray-200 bg-white dark:bg-gray-800 dark:border-gray-700 p-4 flex justify-between items-center">
+        <div>
+          <p class="font-semibold">20 Meals – Delivered by City Shelter</p>
+          <p class="text-sm text-[color:var(--color-neutral-80)] dark:text-gray-400">Request fulfilled successfully</p>
+        </div>
+        <span class="text-sm text-secondary">1 day ago</span>
+      </div>
+      <div class="rounded-xl border border-gray-200 bg-white dark:bg-gray-800 dark:border-gray-700 p-4 flex justify-between items-center">
+        <div>
+          <p class="font-semibold">10kg Rice – From Community Kitchen</p>
+          <p class="text-sm text-[color:var(--color-neutral-80)] dark:text-gray-400">Request fulfilled successfully</p>
+        </div>
+        <span class="text-sm text-secondary">4 days ago</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="border-t border-gray-100 dark:border-gray-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex justify-between items-center">
+      <p class="text-sm text-[color:var(--color-neutral-80)] dark:text-gray-400">© 2025 ReServe — Empowering Communities.</p>
+      <a href="#" class="hover:text-primary">Need Help?</a>
+    </div>
+  </footer>
+
+  <!-- Dark Mode Toggle Script -->
+  <script>
+    document.getElementById('darkToggle').addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>
