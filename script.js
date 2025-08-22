@@ -79,6 +79,23 @@ document.getElementById('signupForm')?.addEventListener('submit', (e) => {
 
 /* ========== ADDED: Login button behavior (minimal, non-invasive) ========== */
 document.getElementById('loginBtn')?.addEventListener('click', (e) => {
+  // Check selected role radio (we added value="donor" / value="recipient" in index.html)
+  const selectedRole = document.querySelector('input[name="role"]:checked')?.value;
+
+  if (selectedRole === 'donor') {
+    // Show alert then redirect to donor dashboard
+    alert('Loggined successfully!');
+    window.location.href = 'donor-dash.html';
+    return;
+  }
+
+  if (selectedRole === 'recipient') {
+    // Show alert then redirect to recipient dashboard
+    alert('Loggined successfully!');
+    window.location.href = 'recipient-dash.html';
+    return;
+  }
+
   // If there's a local login section, scroll to it
   const loginSection = document.getElementById('login') || document.getElementById('loginPage');
   if (loginSection) {
