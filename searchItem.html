@@ -75,7 +75,7 @@
       <ul class="flex gap-6 text-gray-700 dark:text-gray-200 font-medium">
         <li><a href="index.html" class="hover:text-[color:var(--color-primary)]">Home</a></li>
         <li><a href="search.html" class="hover:text-[color:var(--color-primary)]">Search Food</a></li>
-        <li><a href="cart.html" class="hover:text-[color:var(--color-primary)]">Cart</a></li>
+        <li><a id="cartLink" href="cart.html" class="hover:text-[color:var(--color-primary)]">Cart</a></li>
         <li><a href="profile.html" class="hover:text-[color:var(--color-primary)]">Profile</a></li>
       </ul>
       <button id="darkToggle" aria-label="Toggle dark mode" class="px-3 py-2 rounded-lg border border-gray-200 hover:border-primary hover:text-primary transition dark:border-gray-700">
@@ -119,6 +119,15 @@
 
     // Load cart from localStorage
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    // Update cart link with item count
+    document.addEventListener('DOMContentLoaded', () => {
+      const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0, 0);
+      const cartLink = document.getElementById('cartLink');
+      if (cartLink && cartCount > 0) {
+        cartLink.innerHTML += ` <span class="ml-1 text-xs bg-[color:var(--color-primary)] text-white rounded-full px-2 py-1">${cartCount}</span>`;
+      }
+    });
 
     // Show suggestions while typing
     searchBar.addEventListener("input", () => {
@@ -205,6 +214,7 @@
       }
 
       localStorage.setItem("cart", JSON.stringify(cart));
+      updateCartLink();
       searchFood(); // Re-render to update UI
     }
 
@@ -225,7 +235,20 @@
       }
 
       localStorage.setItem("cart", JSON.stringify(cart));
+      updateCartLink();
       searchFood(); // Re-render to update UI
+    }
+
+    // Update cart link with item count
+    function updateCartLink() {
+      const cartLink = document.getElementById('cartLink');
+      if (cartLink) {
+        cartLink.innerHTML = 'Cart';
+        const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0, 0);
+        if (cartCount > 0) {
+          cartLink.innerHTML += ` <span class="ml-1 text-xs bg-[color:var(--color-primary)] text-white rounded-full px-2 py-1">${cartCount}</span>`;
+        }
+      }
     }
 
     // Hide suggestions on click outside
