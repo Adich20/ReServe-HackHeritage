@@ -1,22 +1,35 @@
+/* ========== Design Tokens ========== */
 :root{
-    --color-primary:#2ECC71;   /* Freshness, sustainability */
-    --color-secondary:#5DADE2; /* Trust, tech */
-    --color-accent1:#F39C12;   /* Compassion, CTA */
-    --color-accent2:#9B59B6;   /* Innovation */
-    --color-neutral:#2C3E50;   /* Text */
-    --color-neutral-80:#415b76;
-    --color-surface:#1a1a1a;
-    --ring: 0 0 0 4px rgb(46 204 113 / 20%);
-  }
-  
-  .bg-primary{background-color:var(--color-primary)}
-  .bg-secondary{background-color:var(--color-secondary)}
-  .bg-accent1{background-color:var(--color-accent1)}
-  .bg-accent2{background-color:var(--color-accent2)}
-  .text-primary{color:var(--color-primary)}
-  .text-secondary{color:var(--color-secondary)}
-  .text-accent1{color:var(--color-accent1)}
-  .text-accent2{color:var(--color-accent2)}
-  .text-neutral{color:var(--color-neutral)}
-  .ring-brand:focus{outline:var(--ring)}
-  
+  --color-primary:#2ECC71;   /* Freshness, sustainability */
+  --color-secondary:#5DADE2; /* Trust, tech */
+  --color-accent1:#F39C12;   /* Compassion, CTA */
+  --color-accent2:#9B59B6;   /* Innovation */
+  --color-neutral:#2C3E50;   /* Text (light mode) */
+  --color-neutral-80:#415b76;/* Subtext (light mode) */
+  --color-surface:#f9fafb;   /* Light surface */
+  --ring: 0 0 0 4px rgb(46 204 113 / 20%);
+}
+
+/* Dark mode variable overrides (auto-applies everywhere vars are used) */
+html.dark{
+  --color-neutral:#ECF0F1;     /* Text on dark bg */
+  --color-neutral-80:#BDC3C7;  /* Subtext on dark bg */
+  --color-surface:#111827;     /* Dark surface */
+}
+
+/* ========== Small Utilities bound to tokens ========== */
+.bg-primary{background-color:var(--color-primary)}
+.bg-secondary{background-color:var(--color-secondary)}
+.bg-accent1{background-color:var(--color-accent1)}
+.bg-accent2{background-color:var(--color-accent2)}
+
+.text-primary{color:var(--color-primary)}
+.text-secondary{color:var(--color-secondary)}
+.text-accent1{color:var(--color-accent1)}
+.text-accent2{color:var(--color-accent2)}
+.text-neutral{color:var(--color-neutral)}
+
+.ring-brand:focus{outline:var(--ring)}
+
+/* Optional: smoother color transitions */
+*{transition: color .15s linear, background-color .15s linear, border-color .15s linear;}
