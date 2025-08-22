@@ -62,6 +62,8 @@
         <!-- Nav Links -->
         <nav class="hidden md:flex items-center gap-6">
           <a href="index.html" class="hover:text-primary transition">Home</a>
+          <a href="search.html" class="hover:text-primary transition">Search Food</a>
+          <a id="cartLink" href="cart.html" class="hover:text-primary transition">Cart</a>
           <a href="profile.html" class="hover:text-primary transition">Profile</a>
         </nav>
 
@@ -74,7 +76,7 @@
     </div>
   </header>
 
-  <!-- Checkout Layout -->
+  <!-- Cart Layout -->
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 grid md:grid-cols-3 gap-6">
     <!-- Left: Cart & Receipt -->
     <section class="md:col-span-2 space-y-6">
@@ -153,7 +155,7 @@
     });
 
     // Load cart from localStorage
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
     // Render cart and receipt
     function renderCart() {
@@ -189,7 +191,22 @@
         <p class="flex justify-between font-bold text-accent1"><span>Total</span><span>₹${total.toFixed(2)}</span></p>
       `;
     }
+
+    // Update cart link with item count
+    function updateCartLink() {
+      const cartLink = document.getElementById('cartLink');
+      if (cartLink) {
+        cartLink.innerHTML = 'Cart';
+        const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0, 0);
+        if (cartCount > 0) {
+          cartLink.innerHTML += ` <span class="ml-1 text-xs bg-[color:var(--color-primary)] text-white rounded-full px-2 py-1">${cartCount}</span>`;
+        }
+      }
+    }
+
+    // Initial render
     renderCart();
+    updateCartLink();
 
     // Confirm & Pay action
     document.getElementById('confirmPay').addEventListener('click', () => {
